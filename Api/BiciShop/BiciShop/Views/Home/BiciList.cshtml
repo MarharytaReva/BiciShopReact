@@ -1,0 +1,140 @@
+﻿
+@{
+}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Photo</th>
+            <th>
+                <div>Title</div>
+
+
+                <div class="d-flex flex-nowrap justify-content-center">
+                    <div class="d-inline">
+                        <button class="btn btn-info asyncLoadBtn sortBtn" value="TitleAsc">&#8593;</button>
+                    </div>
+
+                    <div class="d-inline">
+                        <button class="btn btn-info asyncLoadBtn sortBtn" value="TitleDesc">&#8595;</button>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div>Type</div>
+            </th>
+            <th>
+                <div>Price</div>
+                <div class="d-flex flex-nowrap justify-content-center">
+
+                    <div class="d-inline">
+                        <button class="btn btn-info asyncLoadBtn sortBtn" value="PriceAsc">&#8593;</button>
+                    </div>
+
+                    <div class="d-inline">
+                        <button class="btn btn-info asyncLoadBtn sortBtn" value="PriceDesc">&#8595;</button>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div>Color</div>
+
+            </th>
+            <th>
+                <div>Weight</div>
+                <div class="d-flex flex-nowrap justify-content-center">
+                    <div class="d-inline">
+                        <button class="btn btn-info asyncLoadBtn sortBtn" value="WeightAsc">&#8593;</button>
+                    </div>
+
+                    <div class="d-inline">
+                        <button class="btn btn-info asyncLoadBtn sortBtn" value="WeightDesc">&#8595;</button>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div>Issue Year</div>
+                <div class="d-flex flex-nowrap justify-content-center">
+                    <div class="d-inline">
+                        <button class="btn btn-info asyncLoadBtn sortBtn" value="IssueYearAsc">&#8593;</button>
+                    </div>
+
+                    <div class="d-inline">
+                        <button class="btn btn-info asyncLoadBtn sortBtn" value="IssueYearDesc">&#8595;</button>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div>Wheel Diameter</div>
+                <div class="d-flex flex-nowrap justify-content-center">
+                    <div class="d-inline">
+                        <button class="btn btn-info asyncLoadBtn sortBtn" value="WheelDiameterAsc">&#8593;</button>
+                    </div>
+
+                    <div class="d-inline">
+                        <button class="btn btn-info asyncLoadBtn sortBtn" value="WheelDiameterDesc">&#8595;</button>
+                    </div>
+                </div>
+
+            </th>
+            <th> </th>
+            <th> </th>
+            <th> </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bibi in Model.Bicicletas)
+        {
+        <tr>
+            <td><img src="data:image/png;base64,@bibi.Photo" style="max-height: 18vw; max-width: 18vw;"></td>
+            <td>@bibi.Title</td>
+            <td>@bibi.BiciType.BiciTypeName type</td>
+            <td>@bibi.Price ₴</td>
+            <td>@bibi.Color</td>
+            <td>@bibi.Weight</td>
+            <td>@bibi.IssueYear</td>
+            <td>@bibi.WheelDiameter</td>
+            <td><a class="btn btn-success" href="~/Home/MakeOrder/@bibi.BicicletaId">Make an order</a></td>
+            <td>
+                <form method="post" action="~/Cart/AddToCart">
+                    <input type="hidden" value="@bibi.BicicletaId" name="BicicletaId" />
+                    @Html.Hidden("returnUrl", Context.Request.Path)
+                    <input type="submit" value="+ Cart" class="btn btn-primary" />
+                </form>
+            </td>
+            <td>
+                <form method="post" action="~/Cart/RemoveFromCart">
+                    <input type="hidden" value="@bibi.BicicletaId" name="BicicletaId" />
+                    @Html.Hidden("returnUrl", Context.Request.Path)
+                    <input type="submit" value="Remove from Cart" class="btn btn-danger" />
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<input type="hidden" value="@Model.SortType" id="sortTypeInp" />
+<input type="hidden" value="@Model.PageNumber" id="pageNumberInp" />
+<div style="display: flex; justify-content: center;">
+    @for (int i = 1; i <= Model.PageCount; i++)
+    {
+        <button class="btn btn-dark m-1 asyncLoadBtn pageBtn">@i</button>
+    }
+
+</div>
+<script type="text/javascript">
+    $('.asyncLoadBtn').click(function () {
+        let searchText = $('#searchText').val()
+        let colorSelect = $('#colorSelect').val()
+        let typeSelect = $('#typeSelect').val()
+        let sort = $('#sortTypeInp').val()
+        let pageNumber = $('#pageNumberInp').val()
+
+        if ($(this).hasClass('sortBtn')) {
+            sort = $(this).val()
+        }
+        if ($(this).hasClass('pageBtn')) {
+            pageNumber = $(this).text();
+        }
+        $('#biciListDiv').load(`/Home/BiciList/?searchText=${searchText}&color=${colorSelect}&biciType=${typeSelect}&sortType=${sort}&pageNumber=${pageNumber}`)
+    })
+</script>

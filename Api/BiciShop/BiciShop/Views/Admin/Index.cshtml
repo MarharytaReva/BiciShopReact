@@ -1,0 +1,66 @@
+﻿@model AdminIndexData
+@{
+    ViewData["Title"] = "Index";
+    
+   
+}
+
+
+<div class="text-center">
+    <h1>Admin page</h1>
+    <div class="text-right">
+        <a class="btn btn-dark fs-3" href="~/Admin/Create">+</a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Photo</th>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Color</th>
+                <th>Weight</th>
+                <th>Issue Year</th>
+                <th>Wheel Diameter</th>
+                <th> </th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var bibi in Model.Bicicletas)
+            {
+                <tr>
+                    <td><img src="data:image/png;base64,@bibi.Photo" style="max-height: 18vw; max-width: 18vw;"></td>
+                    <td>@bibi.Title</td>
+                    <td>@bibi.BiciType.BiciTypeName type</td>
+                    <td>@bibi.Price ₴</td>
+                    <td>@bibi.Color</td>
+                    <td>@bibi.Weight</td>
+                    <td>@bibi.IssueYear</td>
+                    <td>@bibi.WheelDiameter</td>
+                    <td> 
+                        <a class="btn btn-warning" href="~/Admin/Create/@bibi.BicicletaId">Edit</a>
+                   </td>
+                    <td>
+                        <form method="post" action="~/Admin/Delete">
+                            <input type="hidden" value="@bibi.BicicletaId" name="id" />
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+   
+        <div style="display: flex; justify-content: center;">
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+
+                <a href="~/Admin/Index/@i" class="btn btn-dark m-1">@i</a>
+            }
+
+        </div>
+   
+   
+</div>
+

@@ -1,0 +1,41 @@
+﻿@model BiciShop.Models.ViewModels.LoginViewModel
+@{
+}
+<div class="text-center">
+    
+    <h1 class="display-4">Login form</h1>
+    <form method="post" action="~/Account/Login" asp-antiforgery="true">
+        <input name="returnUrl" value="@Context.Request.Path" type="hidden"/>
+       
+        <div class="mb-3 row">
+            @Html.LabelFor(x => x.Email, new { @class = "col-sm-2 col-form-label" })
+
+            <div class="col-sm-10">
+                @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+
+                <span asp-validation-for="Email" class="alert alert-danger alertStyle" role="alert">
+
+                </span>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            @Html.LabelFor(x => x.Password, new { @class = "col-sm-2 col-form-label" })
+
+            <div class="col-sm-10">
+                @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+
+                <span asp-validation-for="Password" class="alert alert-danger alertStyle" role="alert">
+
+                </span>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Remember me</label>
+            @Html.CheckBoxFor(x => x.RememberMe, new { @class = "m-3"})
+        </div>
+       
+        <input type="submit" value="Login" class="btn btn-success" />
+    </form>
+    <a class="btn btn-primary mt-3" href="~/Account/Registration">Regigtration</a>
+
+</div>

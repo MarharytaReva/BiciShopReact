@@ -1,0 +1,47 @@
+﻿@model HomeIndexData
+@{
+    ViewData["Title"] = "Home Page";
+
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bicicletas</h1>
+    <p style="color: green;">@Model.Text</p>
+
+   
+
+
+    <div class="d-flex justify-content-around">
+        <div class="my-2 my-lg-0 form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" id="searchText" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0 asyncLoadBtn" type="submit">Search</button>
+        </div>
+
+
+        <div>
+            <div class="input-group">
+                <select id="colorSelect" class="custom-select" name="Color" asp-items="@Model.Colors">
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary asyncLoadBtn">Color filter</button>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="input-group">
+                <select id="typeSelect" class="custom-select" name="BiciType" asp-items="@Model.BiciTypes">
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary asyncLoadBtn">Type filter</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    
+    <div id="biciListDiv">
+
+    </div>
+</div>

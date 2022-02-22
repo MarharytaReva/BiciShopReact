@@ -1,0 +1,54 @@
+﻿@model Order
+@{
+    ViewData["Title"] = "MakeOrder";
+}
+
+<h1>Order</h1>
+<form method="post">
+    <input type="hidden" name="BicicletaId" value="@ViewBag.BicicletaId">
+
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+            <input type="email" name="email" class="form-control">
+            <span  asp-validation-for="Email" class="alert alert-danger alertStyle" role="alert">
+               
+            </span>
+        </div>
+        
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+            <input type="text" name="name" class="form-control">
+            <span asp-validation-for="Name" class="alert alert-danger alertStyle" role="alert">
+               
+            </span>
+        </div>
+       
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Lastname</label>
+        <div class="col-sm-10">
+            <input type="text" name="lastname" class="form-control">
+            <span asp-validation-for="Lastname" class="alert alert-danger alertStyle" role="alert">
+               
+            </span>
+        </div>
+        
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Phone</label>
+        <div class="col-sm-10">
+            <input type="tel" name="phone" class="form-control">
+            <span asp-validation-for="Phone" class="alert alert-danger alertStyle" role="alert">
+               
+            </span>
+        </div>
+       
+    </div>
+    <div style="width: 100%; text-align: center;">
+        <input type="submit" class="btn btn-primary" value="Order" />
+    </div>
+   
+</form>

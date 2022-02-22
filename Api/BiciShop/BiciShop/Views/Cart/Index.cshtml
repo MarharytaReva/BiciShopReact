@@ -1,0 +1,47 @@
+﻿@model Cart
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Cart</h1>
+   
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Value</th>
+                <th>Count</th>
+                <th>Price</th>
+
+                <th>Title</th>
+
+                <th>Color</th>
+                <th>Weight</th>
+                <th>Issue Year</th>
+                <th>Wheel Diameter</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var line in Model.CartLines)
+            {
+            <tr>
+                <td>@(line.Bicicleta.Price * line.Count) ₴</td>
+                <td>@line.Count</td>
+                <td>@line.Bicicleta.Price ₴</td>
+                <td>@line.Bicicleta.Title</td>
+                <td>@line.Bicicleta.Color</td>
+                <td>@line.Bicicleta.Weight</td>
+                <td>@line.Bicicleta.IssueYear</td>
+                <td>@line.Bicicleta.WheelDiameter</td>
+            </tr>
+            }
+        <tr class="table-success">
+            <td  class="table-active">Total Value</td>
+            <td colspan="7">@Model.GetTotalValue() ₴</td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="~/Home/Index">Ahead bicicletas list</a>
+</div>
